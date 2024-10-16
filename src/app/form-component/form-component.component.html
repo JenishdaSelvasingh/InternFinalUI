@@ -1,0 +1,51 @@
+<body>
+  <div class="absolute inset-0 flex items-center justify-center text-white z-20">
+      <div>
+          <form [formGroup]="data" class="border-2 rounded-xl drop-shadow-2xl shadow-2xl shadow-themeC max-w-xl pt-8 pb-8 mx-auto px-8 bg-themeC">
+              <div class="flex gap-4 mb-6">
+                  <div class="w-1/2 relative">
+                      <label for="name" class="block mb-2 text-sm font-medium text-white">Name<span class="text-red-500 ml-1">*</span></label>
+                      <input type="text" [ngModelOptions]="{standalone: true}"  formControlName="name" id="name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-none focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5" required />
+                      <div *ngIf="data.get('name')?.invalid && data.get('name')?.touched" class="absolute text-red-500 text-xs mt-1">
+                          <small *ngIf="data.get('name')?.errors?.['required']">Name is required.</small>
+                          <small *ngIf="data.get('name')?.errors?.['minlength']">Name must be at least 5 characters long.</small>
+                      </div>
+                  </div>
+                  <div class="w-1/2 relative">
+                      <label for="ntId" class="block mb-2 text-sm font-medium text-white">NT - ID<span class="text-red-500 ml-1">*</span></label>
+                      <input type="text" [ngModelOptions]="{standalone: true}" formControlName="ntId" id="ntId" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-none focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5" required />
+                      <div *ngIf="data.get('ntId')?.invalid && data.get('ntId')?.touched" class="absolute text-red-500 text-xs mt-1">
+                          <small *ngIf="data.get('ntId')?.errors?.['required']">NT-ID is required.</small>
+                          <small *ngIf="data.get('ntId')?.errors?.['minlength']">NT-ID must be at least 5 characters long.</small>
+                      </div>
+                  </div>
+              </div>
+              <div class="mb-6">
+                  <label for="deviceId" class="block mb-2 text-sm font-medium text-white">Device ID</label>
+                  <div class="shadow-sm bg-gray-50 text-gray-400 text-sm rounded-none focus:ring-blue-500 focus:border-blue-500 block">
+                      <ng-multiselect-dropdown [placeholder]="''" [settings]="settings" [data]="dropdownList" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                      </ng-multiselect-dropdown>
+                  </div>
+              </div>
+              <div class="flex gap-4 mb-6">
+                  <div class="w-1/2 relative">
+                      <label for="manager" class="block mb-2 text-sm font-medium text-white">Manager</label>
+                      <input type="text" [ngModelOptions]="{standalone: true}" formControlName="manager" id="manager" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-none focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5" required />
+                  </div>
+                  <div class="w-1/2 relative">
+                      <label for="email" class="block mb-2 text-sm font-medium text-white">Email<span class="text-red-500 ml-1">*</span></label>
+                      <input type="email" [ngModelOptions]="{standalone: true}" formControlName="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-none focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5" required />
+                      <div *ngIf="data.get('email')?.invalid && (data.get('email')?.dirty || data.get('email')?.touched)" class="absolute text-red-500 text-xs mt-1">
+                          <small *ngIf="data.get('email')?.errors?.['required']">Email is required.</small>
+                          <small *ngIf="data.get('email')?.errors?.['email']">Email must be valid.</small>
+                      </div>
+                  </div>
+              </div>
+              <div class="flex justify-end gap-3">
+                  <button (click)="onSubmit()" [disabled]="data.invalid" type="submit" class="px-4 py-2 rounded-lg opacity-90 border-b-4 text-xs bg-white border-[#41B06E] text-[#41B06E] hover:text-white hover:bg-[#41B06E] transition-all duration-200">Save</button>
+                  <button (click)="closeForm()" class="px-4 py-1 border-b-4 bg-white opacity-90 rounded-lg border-[#FA7070] text-xs text-[#FA7070] hover:text-white hover:bg-[#FA7070] transition-all duration-200">Close</button>
+              </div>
+          </form>
+      </div>
+  </div>
+</body>

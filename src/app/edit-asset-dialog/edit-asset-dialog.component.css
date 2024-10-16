@@ -1,0 +1,49 @@
+.dialog-container {
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+  }
+  
+  .dialog-container h2 {
+    margin-top: 0;
+    /* font-size: 24px; */
+    font-weight: 500;
+  }
+  
+  .dialog-container .form-field {
+    margin-bottom: 15px;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center; 
+    margin-top: 20px; 
+  }
+  
+  .button-container button {
+    margin: 0 10px; 
+  }
+  
+  
+  .dialog-container .submit-button {
+    background-color: #03a9f4;
+    color: white;
+  }
+  
+  
+  .dialog-container .submit-button:hover:enabled {
+    background-color: skyblue;
+  }
+  
+  .dialog-container .cancel-button {
+    background-color: gainsboro;
+    color: black;
+  }
+  
+  

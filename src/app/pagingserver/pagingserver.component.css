@@ -1,0 +1,211 @@
+.all {
+    width: 100%;
+    max-width: 1200px; 
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  
+  ngx-datatable.material {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  ngx-datatable.material .ngx-datatable-header,
+  ngx-datatable.material .ngx-datatable-body,
+  ngx-datatable.material .ngx-datatable-footer {
+    padding: 0; 
+    box-sizing: border-box;
+  }
+  
+  
+  .table-container {
+    width: 100%;
+    max-width: 1200px; 
+    margin: auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  
+  .all {
+    width: 100%;
+  }
+  
+  
+  .table-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  
+  .table-actions button {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  
+  .table-actions button i {
+    font-size: 18px;
+    transition: color 0.3s ease;
+  }
+  
+  
+  .table-actions button i.fa-pencil-square-o {
+    color: blue;
+  }
+  
+  
+  .table-actions button i.fa-trash-o {
+    color: red;
+  }
+  
+  
+  .table-actions button:hover i.fa-pencil-square-o {
+    color: darkblue;
+  }
+  
+  
+  
+  .table-actions button:hover i.fa-trash-o {
+    color: darkred;
+  }
+  
+  
+  .add {
+    background-color: #03a9f4;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    width: 40px;
+    height: 30px;
+  }
+  
+  button.add:hover {
+    background-color: skyblue;
+  }
+  
+  /* ::ng-deep .ngx-datatable .datatable-row-even {
+    background-color: #e9e9e9; 
+  }
+  
+  ::ng-deep .ngx-datatable .datatable-row-odd {
+    background-color: #ffffff; 
+  } 
+  
+   ::ng-deep .ngx-datatable.material:not(.cell-selection) {
+    .datatable-body-row:hover {
+      background: #bfbbbb!important;
+    }
+    .datatable-body-row:hover {
+      .datatable-row-group {
+        background: #bfbbbb !important;
+      }
+    }
+  } */
+
+  ::ng-deep .ngx-datatable .datatable-row-odd {
+    background-color: #ffffff;
+  }
+
+  ::ng-deep .ngx-datatable .datatable-row-even {
+    background-color: var(--themeC-rgba-50);
+  }
+
+  /* rgba(var(--themeC-rgb),0.5); */
+  :host
+  ::ng-deep
+  .ngx-datatable.bootstrap:not(.cell-selection)
+  .datatable-body-row:hover,
+:host
+  ::ng-deep
+  .ngx-datatable.material:not(.cell-selection)
+  .datatable-body-row.datatable-row-even:hover
+  .datatable-row-group {
+  background: var(--themeC-rgba-50);
+}
+  
+  ngx-datatable {
+    input[type="checkbox"] {
+      cursor: pointer;
+    }
+  }
+  
+  .p-button {
+    margin: 5px;
+  }
+  
+  .logout-button {
+    background-color: #03a9f4; 
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logout-button:hover {
+    background-color: skyblue; 
+  }
+  
+  .logout-button i {
+    font-size: 24px; 
+  }
+  
+  .upload {
+    border-style: solid;
+    border-color: #bfbbbb;
+    border-radius: 6px;
+    border-width: 1px;
+    background-color: white;
+    cursor: pointer;
+    width: 40px;
+    height: 30px;
+  }
+  
+  button.upload:hover {
+    background-color: #ddd;
+  }
+  
+  .deleteAll {
+    border-style: solid;
+    border-color: #bfbbbb;
+    border-radius: 6px;
+    border-width: 1px;
+    background-color: white;
+    cursor: pointer;
+    width: 40px;
+    height: 30px;
+  }
+  
+  button.deleteAll:hover {
+    background-color: #ddd;
+  }
+  
+  .mat-button-toggle-group {
+    height: 32px;
+    align-items: center;
+  }
+
+  .mat-button-toggle {
+    color: #000;
+  }
+
+  .flex-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 3px;
+  } 
+
+  

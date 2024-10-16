@@ -1,0 +1,28 @@
+<body class="w-screen h-screen flex">
+    <div class="flex flex-col overflow-clip justify-center items-center w-1/2 bg-white">
+      <img class="w-fit h-fit" src="https://images.pexels.com/photos/5799379/pexels-photo-5799379.jpeg?cs=srgb&dl=pexels-annpoan-5799379.jpg" alt="Clock Image" width="500" height="600">
+    </div>
+    <div class="flex flex-col justify-center items-center w-1/2 border-l border-[#7d644a] bg-[#c9b39d89]">
+      <h2 class="mb-5 flex flex-row font-bold text-[#7d644a]">Reset Your Password</h2>
+      <div class="flex flex-row ml-24 w-full justify-center">
+        <form [formGroup]="data" class="w-1/2">
+          <div class="">
+            <h4 class="text-sm text-[#7d644a]">New password :</h4>
+            <input type="password" formControlName="password" class="w-2/3 mt-2 h-8 pl-2 pr-2 ">
+          </div>
+          <div *ngIf="data.get('password')?.invalid && data.get('password')?.touched" class="text-red-500 fixed -mt-4">
+            <small>Password not valid! (Minimum 8 characters, at least one letter and one number)</small>
+          </div>
+          <div class="mt-8">
+            <h4 class="text-sm text-[#7d644a]">Confirm password :</h4>
+            <input type="password" formControlName="confirmpass" class="w-2/3 mt-2 h-8 pl-2 pr-2 ">
+          </div>
+            <div *ngIf="data.get('confirmpass')?.invalid && data.get('confirmpass')?.touched" class="text-red-500 fixed -mt-4">
+              <small>Passwords do not match!</small>
+            </div>
+          <button (click)="resetPass()" [disabled]="data.invalid" class="px-4 py-2 rounded-none opacity-90 mt-8 border-l-4 text-xs bg-white border-[#7d644a] text-[#7d644a] hover:text-white hover:bg-[#7d644a] transition-all duration-200">Reset</button>
+        </form>
+      </div>
+    </div>
+  </body>
+  

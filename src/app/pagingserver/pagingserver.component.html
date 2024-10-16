@@ -1,0 +1,150 @@
+<app-header></app-header>
+
+
+<ngx-spinner
+  [name]="spinnerName"
+  bdColor="rgba(0,0,0,0.5)"
+  size="medium"
+  color="#ffff"
+  type= "ball-fussion"
+  [fullScreen]="true"
+  >
+  <p style="color: white">Loading...</p>
+</ngx-spinner>
+
+
+<div class="all" style="height: 100vh;">
+
+    <div class="flex-container justify-between gap-2 ">
+      <div class="flex-row">
+          <input type="text" (ngModelChange)="searchFilter($event)" placeholder="Search" [(ngModel)]="searchFilterInput" class="shadow-md px-4 py-1 text-sm border rounded-xl border-themeC active:border-themeC">
+        
+
+        <mat-form-field  class="h-1rem ml-5">
+          <mat-label class="text-xs">Search Attribute</mat-label>
+          <mat-select  [(ngModel)]="searchAttributes" (selectionChange)="clearSearchInput()" multiple class="   ml-2 text-xs" >
+            <mat-option  value="assetID">Asset ID</mat-option>
+            <mat-option  value="assetType">Asset Type</mat-option>
+            <mat-option  value="assetModel">Asset Model</mat-option>
+          </mat-select>
+        </mat-form-field>  
+      </div>    
+
+        
+        <div >
+          <button type="button" matTooltip="Delete All" (click)="deleteAll()" class="shadow-md px-4 py-1 text-sm text-purple-themeC font-semibold rounded-lg border border-themeC hover:text-white hover:bg-themeC hover:border-transparent active:outline-none active:shadow-none active:translate-y-0.2 active:ring-offset-2"> 
+            <i class="fa fa-trash fa-lg"></i> 
+          </button>
+  
+          <button type="button" matTooltip="Asset Bulk Upload" class="shadow-md ml-1 px-4 py-1 text-sm text-purple-themeC font-semibold rounded-lg border border-themeC hover:text-white hover:bg-themeC hover:border-transparent active:outline-none active:shadow-none active:translate-y-0.2 active:ring-offset-2" (click)="triggerFileInput()">
+            <i class="fa fa-upload fa-lg" aria-hidden="true"></i>
+          </button>
+          <input
+            type="file"
+            id="fileInput"
+            (change)="onFileSelected($event)"
+            style="display: none;"
+            multiple
+          />
+          <button type="button" matTooltip="Add Assets" [routerLink]="['/upload']" class="shadow-md ml-1 px-4 py-1 text-sm text-purple-themeC font-semibold rounded-lg border border-themeC hover:text-white hover:bg-themeC hover:border-transparent active:outline-none active:shadow-none active:translate-y-0.2 active:ring-offset-2"> Add </button>
+        </div>
+       
+      </div>
+  
+    <ngx-datatable 
+    style="min-height: 88%;"
+    #table class="material hoverEffects overflow-auto" 
+    [rows]="filteredRows" 
+    [columns]="columns" 
+    (page)="onPageChange($event)"
+    [headerHeight]="50" 
+    [footerHeight]="50" 
+    [rowClass]="onGetRowClass"
+    [rowHeight]="50" 
+    [externalPaging]="true" 
+    [count]="totall"
+    [offset]="page" 
+    [limit]="size"
+    [scrollbarV]="true"
+    [virtualization]="false"
+    [selected]="selected"
+    [selectionType]="SelectionType.checkbox"
+    (select)="onSelect($event)"
+    >
+  
+    <ngx-datatable-column
+    [width]="30"
+    [sortable]="false"
+    [canAutoResize]="false"
+    [draggable]="false"
+    [resizeable]="false"
+    >
+  
+    <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+          <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
+        </ng-template>
+        <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+          <input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
+        </ng-template>
+      </ngx-datatable-column>
+  
+  
+      <ngx-datatable-column *ngFor="let column of columns; let i = index" name="{{ column.name }}"
+        prop="{{ column.prop }}"> 
+      </ngx-datatable-column>
+  
+  
+      <ngx-datatable-column name="Is Active" prop="isActive">
+        <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+          {{value ? 'Yes':'No'}}
+        </ng-template> 
+      </ngx-datatable-column>
+  
+  
+      <ngx-datatable-column [width]="200" name="Date Created" prop="dateCreated">
+        <ng-template ngx-datatable-cell-template let-value="value">
+          {{ value | date: 'MM/dd/yyyy HH:mm:ss a' }}
+        </ng-template>
+      </ngx-datatable-column>
+  
+  
+      <ngx-datatable-column [width]="200" name="Last Updated" prop="lastUpdated">
+        <ng-template ngx-datatable-cell-template let-value="value">
+          {{ value | date: 'MM/dd/yyyy HH:mm:ss a' }}
+        </ng-template>
+      </ngx-datatable-column>
+  
+      <ngx-datatable-column name="Action">
+        <ng-template ngx-datatable-cell-template let-row="row">
+          <div class="table-actions">
+           <button type="button" matTooltip="Edit Row" (click)="editRow(row)" class="edit"> 
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 
+          </button>
+             <button type="button" matTooltip="Delete Row" (click)="deleteAsset(row)" class="delete"> 
+              <i class="fa fa-trash-o" aria-hidden="true"></i> 
+            </button> 
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+    
+  
+    <ngx-datatable-footer>
+      <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize"
+        let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset">
+        <div class="p-3">{{ selectedCount }} selected / {{ rowCount }} total</div>
+        <datatable-pager 
+        [pagerLeftArrowIcon]="'datatable-icon-left'" 
+        [pagerRightArrowIcon]="'datatable-icon-right'"
+        [pagerPreviousIcon]="'datatable-icon-prev'" 
+        [pagerNextIcon]="'datatable-icon-skip'" 
+        [size]="pageSize"
+        [count]="totall" 
+        (change)="table.onFooterPage($event)"
+        >
+        </datatable-pager>
+      </ng-template>
+    </ngx-datatable-footer>
+  </ngx-datatable>
+  </div>
+  
+  

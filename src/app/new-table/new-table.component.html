@@ -1,0 +1,46 @@
+<app-header-user></app-header-user>
+<app-confirm-mail (boolConfirm)="mailBox($event)" ></app-confirm-mail>
+
+<div class="rounded-t-xl overflow-hidden bg-gradient-to-r from-emerald-50 to-teal-100 min-h-screen">
+  <div class="container mx-auto mt-7 p-4 lg:p-10">
+    <div class="flex flex-wrap justify-start items-start">
+      <div class="flex flex-col mb-6 lg:mr-10">
+        <div class="mb-4 bg-white text-emerald-600 p-2 rounded-lg shadow-md">NtId : {{ ntIdv }}</div>
+        <div class="bg-white text-emerald-600 p-2 rounded-lg shadow-md">Email : {{ mailv }}</div>
+      </div>
+      <div class="flex flex-col mb-6 lg:mr-10">
+        <div class="mb-4 bg-white text-emerald-600 p-2 rounded-lg shadow-md">Name : {{ namev }}</div>
+        <div class="bg-white text-emerald-600 p-2 rounded-lg shadow-md">Current Device IDs : {{ deviceIdsv }}</div>
+      </div>
+      <div class="flex flex-col lg:ml-24 lg:mb-0 w-full lg:w-auto">
+        <div class="mb-2 text-emerald-600">Request a device</div>
+        <ng-multiselect-dropdown [(ngModel)]="selectedItems" [ngModelOptions]="{ standalone: true }" class="bg-slate-50 w-full lg:w-44 text-gray-400"
+          [placeholder]="''"
+          [settings]="settings"
+          [data]="dropdownList"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)">
+        </ng-multiselect-dropdown>
+      </div>
+      <div class="flex flex-col items-start lg:ml-5 mt-2 lg:mt-0">
+        <button (click)="ConfirmMail()" class="bg-emerald-500 text-white translate-y-7 text-sm p-2 shadow-md shadow-black active:shadow-none rounded-xl">Submit</button>
+      </div>
+    </div>
+  </div>
+  <div class="p-4 lg:p-10">
+    <table class="table-auto w-full">
+      <thead>
+        <tr>
+          <th class="px-4 py-2 text-emerald-600">Device Id</th>
+          <th class="px-4 py-2 text-emerald-600">Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of forms; let i = index" [ngClass]="onGetRowClass(row)">
+          <td class="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium">{{ row.deviceId }}</td>
+          <td class="border border-emerald-500 px-4 py-2 text-emerald-600 font-medium">{{ row.formattedTime }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+.heading {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 2rem;
+  }
+  
+  .all {
+    max-width: 550px;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    box-shadow: 0 0 20px var(--themeC-rgba-50);
+  }
+  
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  
+    .form-field {
+      flex: 0 0 48%;
+      margin-bottom: 16px;
+  
+      mat-form-field {
+        width: 100%;
+      }
+    }
+  }
+  
+  .custom-label {
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
+  .button-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 30px
+  }
+  
+  button {
+    min-width: 120px;
+  }
+  
+  
+  button.submit-button {
+    background-color: #03a9f4;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none; 
+    margin-left: 10em;
+  }
+  
+  button.submit-button:hover {
+    background-color: skyblue;
+  }
+  
+  button.cancel-button {
+    background-color: gainsboro;
+    color: black;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+  }
+  
+  

@@ -1,0 +1,43 @@
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<div class="bg-gray-50 min-h-screen flex items-center justify-center px-16">
+    <div class="relative w-full max-w-lg">
+        <div class="absolute opacity-50 top-0 left-0 w-96 h-72 blur-xl mix-blend-multiply bg-red-300 rounded-full"></div>
+        <div class="absolute opacity-50 top-0 -right-3 w-96 h-72 blur-xl mix-blend-multiply bg-purple-300 rounded-full"></div>
+        <div class="absolute opacity-50 bottom-20 left-32 w-96 blur-xl h-72 mix-blend-multiply bg-yellow-300 rounded-full"></div>
+
+        <!-- <span class="material-symbols-outlined scale-100 translate-y-1 p-1">
+            error
+            </span> -->
+
+        <div class="container m-20 mx-auto flex justify-center">
+            <div class="border-2 p-8 w-96 rounded-xl drop-shadow-2xl shadow-2xl bg-white">
+                <h3 class="text-center text-xl font-semibold mb-4">Login</h3>
+                <p class="opacity-50 text-center mb-5">Login to get into asset manager.</p>
+                <div *ngIf="this.invalid" class="p-2 rounded-md items-center text-center bg-red-400 text-white mb-3">Incorrect Id or password.</div>
+                <form [formGroup]="creds" [ngModelOptions]="{standalone: true}" class="gap-3">
+                    <div class="gap-3">
+                        <div class="mb-6">
+                            <label for="user" class="block mb-2 text-sm font-medium text-black">User Id</label>
+                            <input type="text" formControlName="user" [ngModelOptions]="{standalone: true}" id="user" class="shadow-sm w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-blue-700 dark:border-blue-600 dark:placeholder-blue-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required/>
+                            <div *ngIf="creds.get('user')?.invalid && creds.get('user')?.touched" class="text-red-500 absolute text-sm"><small>User Id is required.</small></div>
+                        </div>
+                        <div class="mb-6">
+                            <label for="password" class="block mb-2 text-sm font-medium text-black">Password</label>
+                            <input type="password" formControlName="password" [ngModelOptions]="{standalone: true}" id="password" class="shadow-sm w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required/>
+                            <div *ngIf="creds.get('password')?.invalid && creds.get('password')?.touched" class="text-red-500 absolute text-sm"><small>Password is required.</small></div>
+
+                            <!-- <span *ngIf="creds.valid && creds.touched" class="text-sm ml-1 text-red-500">Invalid Format!</span> -->
+                        </div>
+                        <div class="text-center">
+                            <button (click)="onLogin()" type="submit" class="px-4 py-2 rounded-lg opacity-90 border-b-4 text-xs bg-white border-[#41B06E] text-[#41B06E] hover:text-white hover:bg-[#41B06E] transition-all duration-200">login</button>
+                        </div>
+                        <div class="text-center mt-3">
+                            <small>Forgot your password?<small (click)="navigatee()" type="submit" class="text-blue-600 hover:cursor-pointer ml-1">reset here...</small></small>
+                        </div>
+                    </div>
+                </form>     
+            </div>
+        </div>
+    </div>
+</div>

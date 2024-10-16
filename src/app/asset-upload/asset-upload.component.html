@@ -1,0 +1,80 @@
+<h2 class="heading font-medium scale-75">ASSETS UPLOAD</h2>
+
+<div class="all">
+    <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+         <div class="form-field">
+            <label class="custom-label">ASSET ID</label>
+            <mat-form-field appearance="fill">
+                <mat-label>Enter Asset ID</mat-label>
+                <input matInput formControlName="assetID">
+                <mat-error *ngIf="uploadForm.controls['assetID'].hasError('required')">Asset ID is required </mat-error>
+                <mat-error *ngIf="uploadForm.controls['assetID'].hasError('minlength')">Asset ID must be atleast 5 characters long > </mat-error>
+                <mat-error *ngIf="uploadForm.controls['assetID'].hasError('maxlength')">Asset ID cannot be more than 20 characters long> </mat-error>
+                <mat-error *ngIf="uploadForm.controls['assetID'].hasError('pattern')">Asset ID cannot contain special characters> </mat-error>
+            </mat-form-field>
+         </div>
+
+        <div class="form-field">
+            <label class="custom-label">ASSET TYPE</label>
+            <mat-form-field appearance="fill">
+                <mat-label>Choose Asset Type</mat-label>
+                <mat-select formControlName="assetType">
+                    <mat-option value="Laptop">Laptop</mat-option>
+                    <mat-option value="MacBook">MacBook</mat-option>
+                    <mat-option value="HeadPhone">Headphone</mat-option>
+                    <mat-option value="PC">PC</mat-option>
+                    <mat-option value="Keyboard">Keyboard</mat-option>
+                    <mat-option value="Mouse">Mouse</mat-option>
+                </mat-select>
+                <mat-error *ngIf="assetType?.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-field">
+            <label class="custom-label">ASSET MODEL</label>
+            <mat-form-field appearance="fill">
+                <mat-label>Choose Asset Model</mat-label>
+                <mat-select formControlName="assetModel">
+                    <mat-option value="Dell">Dell</mat-option>
+                    <mat-option value="Lenova">Lenova</mat-option>
+                    <mat-option value="hp">hp</mat-option>
+                    <mat-option value="acer">acer</mat-option>
+                    <mat-option value="Apple">Apple</mat-option>
+                </mat-select>
+                <mat-error *ngIf="assetModel?.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-field">
+            <label class="custom-label">ACTIVE STATUS</label>
+            <mat-radio-group formControlName="isActive" required>
+              <mat-radio-button class="mr-2" value="yes" color="primary">Yes</mat-radio-button>
+              <mat-radio-button value="no" color="primary">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+
+        <div class="form-row center-notes">
+        <div class="form-row">
+        <div class="form-field">
+            <label class="custom-label">NOTES</label>
+            <mat-form-field appearance="fill">
+                <mat-label>Type Here...</mat-label>
+                <textarea matInput formControlName="notes" class="notes"></textarea>
+            
+            </mat-form-field>
+        </div>
+    </div>
+    </div>
+
+    <div class="form-row">
+        <div class="button-container">
+            <button type="submit" (click)="saveAssets()" mat-raised-button class="submit-button">Submit</button>
+            <button type="button" (click)="goBack()" mat-raised-button class="cancel-button">Back</button>
+        </div>
+    </div>
+    </form>
+</div>

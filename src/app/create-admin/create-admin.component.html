@@ -1,0 +1,44 @@
+<body>
+    <div class="absolute inset-0 flex items-center justify-center text-white z-20 opacity-100">
+        <div>
+            <form [formGroup]="data" [ngModelOptions]="{standalone: true}"
+                class="border-2 border-white rounded-xl drop-shadow-2xl shadow-2xl shadow-themeC max-w-xl pt-8 pb-8 mx-100 p-3 pr-20 pl-20 bg-themeC opacity-100">
+                <div class="flex gap-3">
+                    <div class="mb-5">
+                        <label for="userId" class="block mb-2 text-sm font-medium text-white">User ID<span
+                                class="text-red-500 mr-2">*</span></label>
+                        <input type="text" [ngModelOptions]="{standalone: true}" formControlName="userId" id="userId"
+                            name="userId"
+                            class="shadow-sm bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-none focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5"
+                            required />
+                        <div *ngIf="data.get('userId')?.invalid && data.get('userId')?.touched"
+                            class="text-red-500 absolute text-xs">
+                            <small *ngIf="data.get('userId')?.errors?.['required']">Id is required.</small>
+                            <small *ngIf="data.get('userId')?.errors?.['minlength']">Id must be at least 5 characters
+                                long.</small>
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <label for="password" class="block mb-2 text-sm font-medium text-white">Password<span
+                                class="text-red-500 mr-2">*</span></label>
+                        <input type="password" [ngModelOptions]="{standalone: true}" formControlName="password"
+                            id="password" name="password"
+                            class="shadow-sm bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-none focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5"
+                            required />
+                        <div *ngIf="data.get('password')?.invalid && data.get('password')?.touched"
+                            class="text-red-500 absolute text-xs">
+                            <small *ngIf="data.get('password')?.errors?.['required']">Password is required.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-3">
+                    <button (click)="setAdmin()" [disabled]="data.invalid" type="submit"
+                        class="px-4 py-2 rounded-lg opacity-90 border-b-4 text-xs bg-white border-[#41B06E] text-[#41B06E] hover:text-white hover:bg-[#41B06E] transition-all duration-200">Create</button>
+                    <button (click)="closePop()" type="submit"
+                        class="px-4 py-2 rounded-lg opacity-90 border-b-4 text-xs bg-white border-red-400 text-[#41B06E] hover:text-white hover:bg-red-400 transition-all duration-200">Cancel</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,46 @@
+
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/material.css';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+@import url('https://unpkg.com/ag-grid-community@28.2.0/styles/ag-grid.css');
+@import url('https://unpkg.com/ag-grid-community@28.2.0/styles/ag-theme-alpine.css');
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import 'ngx-toastr/toastr';
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+@import '@ng-vibe/toastify/styles/styles';
+
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+/* html, body { height: 100%; overflow: hidden;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@media screen and (max-width: 900px) {
+    html,
+    body {
+      font-size: 15px;
+    }
+  }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+
+
+:root {
+    --themeC: #8AAAE5;
+    --themeC-rgb: 138,170,229; 
+    --themeC-rgba-50: rgba(var(--themeC-rgb), 0.5);
+  }
+  
+  .bg-themeC {
+    background-color: var(--themeC);
+  }
+  
+  .text-themeC {
+    color: var(--themeC);
+  }
+  
+
+  /* 8AAAE5 */
+  /* D8EFD3 */

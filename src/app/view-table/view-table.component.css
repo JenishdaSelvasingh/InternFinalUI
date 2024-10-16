@@ -1,0 +1,45 @@
+#tooltip{
+    cursor: pointer;
+    width: auto;
+    height: auto; 
+    white-space: nowrap;
+}
+
+#tooltipText{
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s;
+    position: absolute; 
+    z-index: 9999; 
+    top: -30px;
+    left: 92%; 
+    transform: translateX(-50%);
+
+}
+
+::ng-deep .blueRow{
+    background: #d8fcf4;
+    
+  }
+
+::ng-deep .whiteRow{
+    background: white;
+  }
+
+  :host
+  ::ng-deep
+  .ngx-datatable.bootstrap:not(.cell-selection)
+  .datatable-body-row:hover,
+:host
+  ::ng-deep
+  .ngx-datatable.material:not(.cell-selection)
+  .blueRow:hover
+  .datatable-row-group {
+  background: #ddfcf5;
+}
+
+
+#tooltip:hover #tooltipText{
+    visibility: visible;
+    opacity: 1;
+}

@@ -1,0 +1,166 @@
+<app-header></app-header>
+
+<script src="../path/to/datatables.min.js"></script>
+<div class="mt-6">
+  <div id="bgScreen1" class="flex justify-between" style="width: 1250px;"> <!-- Set a fixed width -->
+    <div class="flex justify-start ml-16 gap-4">
+      <input class="shadow-md px-4 py-1 text-sm border rounded-xl border-themeC active:border-themeC" (input)="onSearch(filter.value)" type="text" placeholder="Search..." #filter>
+      <button class="shadow-md px-4 py-1 text-sm text-purple-themeC font-semibold rounded-lg border border-themeC hover:text-white hover:bg-themeC hover:border-transparent active:outline-none active:shadow-none active:translate-y-0.2 active:ring-offset-2" [ngClass]="{'toggleSearch':searchKeys.includes('name')}" type="button" (click)="toggleSearchKey('name')">Name</button>
+      <button class="shadow-md px-4 py-1 text-sm text-purple-themeC font-semibold rounded-lg border border-themeC hover:text-white hover:bg-themeC hover:border-transparent active:outline-none active:shadow-none active:translate-y-0.2 active:ring-offset-2" [ngClass]="{'toggleSearch':searchKeys.includes('ntId')}" type="button" (click)="toggleSearchKey('ntId')">NtId</button>
+      <button class="shadow-md px-4 py-1 text-sm text-purple-themeC font-semibold rounded-lg border border-themeC hover:text-white hover:bg-themeC hover:border-transparent active:outline-none active:shadow-none active:translate-y-0.2 active:ring-offset-2" [ngClass]="{'toggleSearch':searchKeys.includes('email')}" type="button" (click)="toggleSearchKey('email')">Mail</button>
+      <button class="shadow-md px-4 py-1 text-sm text-purple-themeC font-semibold rounded-lg border border-themeC hover:text-white hover:bg-themeC hover:border-transparent active:outline-none active:shadow-none active:translate-y-0.2 active:ring-offset-2" [ngClass]="{'toggleSearch':searchKeys.includes('manager')}" type="button" (click)="toggleSearchKey('manager')">Manager</button>
+    </div>
+    <div class="flex items-center gap-2 mr-16">
+      <label [ngClass]="{'edit':isDisabled()}" class="flex flex-col items-center gap-2 shadow-md px-4 py-1 text-sm border border-themeC rounded-xl cursor-pointer">
+        <small>Click to select a file</small>
+        <input class="hidden" type="file" [disabled]="roleDisable"  (change)="onFileSelected($event)">
+      </label>
+      <button [disabled]="!this.fileSelect" [ngClass]="{'edit':isDisabled()}" (click)="sendFile()" class="shadow-md px-4 py-1 text-sm text-purple-themeC font-semibold rounded-lg border border-themeC hover:text-white hover:bg-themeC hover:border-transparent active:outline-none active:shadow-none active:translate-y-0.2 active:ring-offset-2" type="button">Upload File</button>
+      <small *ngIf="this.fileSelect" class="text-green-500 mt-1 ml-60 fixed scale-75">File Selected.</small>
+      <small *ngIf="this.fileSelect" class="text-green-500 mt-1 ml-72 translate-x-5 fixed scale-75"><button (click)="unselectFile()">x</button></small>
+    </div>
+    <button *ngIf="this.reqs.length == 0" class="mr-16 p-1 shadow-md text-xs w-10 text-themeC font-semibold rounded-md  border-themeC hover:text-white hover:bg-themeC hover:border-transparent active:outline-none active:shadow-none active:translate-y-0.2 active:ring-offset-2 relative" type="button">
+      <span [ngClass]="{'edit':isDisabled()}" class="material-symbols-outlined">
+        notifications
+      </span>
+    </button>
+    <button *ngIf="this.reqs.length" (click)="addReqPopupOpen()" class="mr-16 p-1 shadow-md text-xs text-themeC font-semibold rounded-md  border-themeC hover:text-white hover:bg-themeC hover:border-transparent active:outline-none active:shadow-none active:translate-y-0.2 active:ring-offset-2 relative" type="button">
+      <span [ngClass]="{'edit':isDisabled()}" class="material-symbols-outlined">
+        notifications
+      </span>
+      <span class="badge align-top mr-1  -ml-1">{{ this.reqs.length }}</span>
+    </button>
+    <button (click)="openForm()" [ngClass]="{'edit':isDisabled()}" [disabled]="roleDisable" class="mr-16 shadow-md px-4 py-1 text-sm text-purple-themeC font-semibold rounded-full border border-themeC hover:text-white hover:bg-themeC hover:border-transparent active:outline-none active:shadow-none active:translate-y-0.2 active:ring-offset-2" type="button">Add User</button>
+  </div>
+</div>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<div *ngIf="addUserPopup">
+  <app-form-component (popupClose)="addUserPopupClose($event)"></app-form-component>
+</div>
+<div *ngIf="addUpdatePopup">
+  <app-update (updatePopClose)="addUpdatePopupClose($event)"></app-update>
+</div>
+<div *ngIf="addReqPopup">
+  <app-req-manage (reqPopupClose)="RequestPopupClose($event)"></app-req-manage>
+</div>
+<app-alert-box (alertClose)="addAlertBox($event)"></app-alert-box>
+<br>
+<button *ngIf="delFlag"  [disabled]="roleDisable" [ngClass]="{'edit':isDisabled()}" (click)="onMultiDel()" class="material-symbols-outlined absolute hover:scale-110 text-red-500 ml-24 translate-y-1">
+  delete_sweep
+</button>
+<br>
+<div class="scale-90 -mt-2" id="bgScreen">
+  <ngx-datatable 
+    #table
+    class="material"
+    [rows]="forms"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowClass]="onGetRowClass"
+    rowHeight="auto"
+    [externalPaging]="true"
+    [count]="totall"
+    [offset]="pageNumber"
+    [limit]="pageSize"
+    (page)="onPageChange($event)"
+    (sort)="onSort($event)"
+    [selected]="selected"
+    [selectionType]="SelectionType.checkbox"
+    [selectAllRowsOnPage]="false"
+    (activate)="onActivate($event)"
+    (select)="onSelect($event)"
+  >
+  <ngx-datatable-column
+            [width]="30"
+            [sortable]="false"
+            [canAutoResize]="false"
+            [draggable]="false"
+            [resizeable]="false"
+            [headerCheckboxable]="true"
+            [checkboxable]="true"
+          >
+          </ngx-datatable-column>
+    <ngx-datatable-column name="#" [width]="80" [sortable]="false">
+      <ng-template let-rowIndex="rowIndex" ngx-datatable-cell-template>
+        {{ (pageKeep * pageSize) + rowIndex + 1 }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [width]="170" *ngFor="let colDef of colDefs" [name]="colDef.name" [prop]="colDef.prop">
+      <ng-template let-column="column" ngx-datatable-header-template>
+        {{ column.name }}
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{ value }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Device" [width]="140" [sortable]="false">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <div (click)="checker(row.deviceId)" id="tooltip">
+          <span *ngIf="row.deviceId && row.deviceId.length != 0" class="material-symbols-outlined pl-1 text-green-400 hover:font-semibold">
+            check_circle
+          </span>
+          <span *ngIf="row.deviceId && row.deviceId.length === 0" class="material-symbols-outlined pl-1 text-red-400 hover:font-semibold">
+            cancel
+          </span>
+          <div *ngIf="row.deviceId && row.deviceId.length != 0" id="tooltipText" class="border-2 border-green-400 bg-green-400 text-white font-bold p-3 shadow-md rounded-lg text-center text-xs absolute z-10">
+            <span>{{ row.deviceId }}</span>
+          </div>
+          <div *ngIf="row.deviceId && row.deviceId.length === 0" id="tooltipText" class="border-2 border-red-400 bg-red-400 text-white font-bold p-2 shadow-md rounded-lg text-center text-sm absolute z-10">
+            <span>!</span>
+          </div>
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Settings" [width]="170" [sortable]="false">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <button class="text-green-400 hover:font-semibold" [disabled]="roleDisable" [ngClass]="{'edit':isDisabled()}" (click)="editRow(row.ntId)">
+          <span class="material-symbols-outlined">
+            edit
+          </span>
+        </button>
+        <button class="text-red-500 hover:font-semibold" [disabled]="roleDisable" [ngClass]="{'edit':isDisabled()}" (click)="deleteRow(row.ntId)">
+          <span class="material-symbols-outlined">
+            delete
+          </span>
+        </button>
+      </ng-template>
+    </ngx-datatable-column>
+    <!-- <ngx-datatable-column name="Mail" [width]="170" [sortable]="false">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <button class="text-blue-500 hover:font-semibold" (click)="ConfirmMail(row.ntId)">
+          <span class="material-symbols-outlined">
+            mail
+          </span>
+        </button>
+      </ng-template>
+    </ngx-datatable-column> -->
+    <ngx-datatable-footer>
+      <ng-template
+        ngx-datatable-footer-template
+        let-rowCount="rowCount"
+        let-pageSize="pageSize"
+        let-selectedCount="selectedCount"
+        let-curPage="curPage"
+        let-offset="offset">
+        <div class="p-3">{{ rowCount }} total</div>
+        <datatable-pager
+          [pagerLeftArrowIcon]="'datatable-icon-left'"
+          [pagerRightArrowIcon]="'datatable-icon-right'"
+          [pagerPreviousIcon]="'datatable-icon-prev'"
+          [pagerNextIcon]="'datatable-icon-skip'"
+          [size]="pageSize"
+          [count]="totall"
+          (change)="table.onFooterPage($event)">
+        </datatable-pager>
+      </ng-template>
+    </ngx-datatable-footer>
+  </ngx-datatable>
+</div>

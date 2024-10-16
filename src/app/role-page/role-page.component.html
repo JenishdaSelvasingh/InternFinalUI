@@ -1,0 +1,27 @@
+<app-header class=" relative"></app-header>
+<div class="  bg-white  flex  justify-center">
+    <div class="w-full max-w-3xl  text-center">
+        <div *ngIf="addPopUp">
+            <app-create-admin (popupClose)="addPopupClose($event)"></app-create-admin>
+        </div>
+        <div class="flex">
+            <button class="font-semibold shadow-md p-2 mt-24 rounded-xl border border-themeC hover:text-white hover:bg-themeC hover:border-transparent active:outline-none active:shadow-none active:translate-y-0.2 active:ring-offset-2" (click)="addPopupOpen()">Create</button>
+        </div>
+        <br>
+        <br>
+        <table class="table-auto w-full">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2 text-themeC">User Id</th>
+                    <th class="px-4 py-2 text-themeC">Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of forms; let i = index">
+                    <td class="border border-themeC px-4 py-2 text-themeC font-medium">{{ row.adminID }}</td>
+                    <td class="border border-themeC px-4 py-2 text-themeC font-medium">{{ row.accessTags }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

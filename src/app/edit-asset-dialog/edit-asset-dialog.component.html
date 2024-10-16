@@ -1,0 +1,65 @@
+<div class="dialog-container">
+    <h2>Edit Asset</h2>
+    <form (ngSubmit)="onSubmit()" #editAssetForm="ngForm">
+      <div class="form-row">
+        <div class="form-field">
+          <mat-form-field appearance="fill">
+          <mat-label>Asset ID</mat-label>
+              <input matInput [(ngModel)]="asset.assetID" name="assetID" required>
+          </mat-form-field>
+       </div>
+  
+        <div class="form-field">
+          <mat-form-field appearance="fill">
+            <mat-label>Asset Type</mat-label>
+            <mat-select [(ngModel)]="asset.assetType" name="assetType" required>
+              <mat-option value="Laptop">Laptop</mat-option>
+              <mat-option value="MacBook">MacBook</mat-option>
+              <mat-option value="Headphone">Headphone</mat-option>
+              <mat-option value="PC">PC</mat-option>
+              <mat-option value="Keyboard">Keyboard</mat-option>
+              <mat-option value="Mouse">Mouse</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <div class="form-row">
+        <div class="form-field">
+          <mat-form-field appearance="fill">
+            <mat-label>Asset Model</mat-label>
+            <mat-select [(ngModel)]="asset.assetModel" name="assetModel" required>
+              <mat-option value="Dell">Dell</mat-option>
+              <mat-option value="Lenova">Lenova</mat-option>
+              <mat-option value="hp">hp</mat-option>
+              <mat-option value="acer">acer</mat-option>
+              <mat-option value="Apple">Apple</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+     
+        <div class="form-field">
+          <mat-form-field appearance="fill">
+            <mat-label>Notes</mat-label>
+            <textarea matInput [(ngModel)]="asset.notes" name="notes"></textarea>
+          </mat-form-field>
+        </div>
+        
+      </div>
+  
+        <div class="form-field">
+          <mat-radio-group class="" [(ngModel)]="asset.isActive" name="isActive">
+            <mat-label class="mr-2">Is Active:</mat-label>
+            <mat-radio-button class="mr-2" [value]="true" color="primary">Yes</mat-radio-button>
+            <mat-radio-button [value]="false" color="primary">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+  
+  
+      <div class="form-field button-container">
+        <button type="submit" (click)="onSubmit()" mat-raised-button class="submit-button">Save</button>
+        <button type="button" (click)="onCancel()" mat-raised-button class="cancel-button">Cancel</button>
+      </div>
+    </form>
+  </div>
+  

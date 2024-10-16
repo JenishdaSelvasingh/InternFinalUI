@@ -1,0 +1,23 @@
+<header class="bg-blend-lighten hover:bg-blend-darken flex flex-nowrap shadow-lg p-4">
+    <div class="flex w-1/6 items-center">
+      <!-- <img class="inline size-8 m-2 border rounded-3xl bg-white" src="../../assets/letter-a.png" alt="asset logo"> -->
+      <span class="text-themeC font-bold pl-1 flex items-center h-1/2">Asset Manager</span>
+    </div>
+    <button class="text-sm items-center flex w-1/6">
+      <a routerLink="/user-table-component" id="userBar" class="text-black flex items-center opacity-80" [ngClass]="{ 'active-link': isActive('/user-table-component') }">Users</a>
+      <hr>
+      <a routerLink="/paging" class="text-black flex items-center ml-10 opacity-80" [ngClass]="{ 'active-link': isActive('/paging') }">Assets</a>
+      <hr>
+      <button routerLink="/role-component" [disabled]="roleDisable" [ngClass]="{'edit':isDisabled()}" class="text-black flex items-center ml-10 opacity-80" [ngClass]="{ 'active-link': isActive('/role-component') }">Role Set</button>
+    </button>
+    <div class="text-sm flex ml-auto gap-2 ">
+      <button class="bg-[#8AAAE5] w-5 h-5 shadow-md rounded-full" (click)="changeColor('#8AAAE5')"></button>
+      <button class="bg-[#E7D4B5] w-5 h-5 shadow-md rounded-full" (click)="changeColor('#E7D4B5')"></button>
+      <button class="bg-[#FF90BC] w-5 h-5 shadow-md rounded-full" (click)="changeColor('#FF90BC')"></button>
+
+    </div>
+    <div class="text-sm flex ml-auto">
+      <button (click)="onLogout()" class="text-black items-end opacity-80 hover:text-themeC">Logout</button>
+    </div>
+  </header>
+  

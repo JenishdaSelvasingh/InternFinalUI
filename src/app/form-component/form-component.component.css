@@ -1,0 +1,23 @@
+.example-additional-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+  }
+
+  
+  
+
+   :host::ng-deep.selected-item {
+    border-radius: 6px !important;
+    background: var(--themeC) !important;
+    border: 1px solid var(--themeC) !important;
+    }
+    
+    :host::ng-deep ng-multiselect-dropdown .multiselect-item-checkbox input[type=checkbox] + div:before {
+    border: 2px solid var(--themeC) !important;
+    }
+    
+    :host::ng-deep ng-multiselect-dropdown .multiselect-item-checkbox input[type=checkbox]:checked + div:before {
+    background: var(--themeC) !important;
+    }
+
+    

@@ -1,0 +1,54 @@
+<body class="w-screen h-screen flex">
+    <div class="flex flex-col overflow-hidden justify-center items-center w-1/2 h-full bg-white">
+      <!-- Uncomment the following line to add the image -->
+      <!-- <img class="max-w-full max-h-full object-cover" src="https://images.pexels.com/photos/5799379/pexels-photo-5799379.jpeg?cs=srgb&dl=pexels-annpoan-5799379.jpg" alt="Clock Image"> -->
+      <div class="text-center text-4xl font-bold text-[#7d644a] bg-white border border-[#7d644a] shadow-md rounded-md p-20">
+        <div>{{ hr }}</div>
+        <div class="mt-14">{{ mn }}</div>
+        <div class="mt-14">{{ sec }}</div>
+        <div class="mt-14">{{ period }}</div>
+      </div>
+    </div>
+  
+    <div class="flex flex-col justify-center items-center w-1/2 h-full border-l border-[#7d644a] bg-[#c9b39d89] p-8">
+      <h2 class="mb-5 font-bold text-[#7d644a]">Reset Your Password Here</h2>
+      <div class="flex w-full justify-center">
+        <form [formGroup]="data" class="w-2/3 relative">
+          <div class="mb-4">
+            <h4 class="text-sm text-[#7d644a]">Mail:</h4>
+            <input type="text" formControlName="mail" class="w-full mt-2 h-8 pl-2 pr-2 border rounded-md">
+            <div *ngIf="data.get('mail')?.invalid && data.get('mail')?.touched" class="text-red-500 mt-1 absolute">
+              <small class="scale-75">Invalid Mail</small>
+            </div>
+          </div>
+          <button (click)="sendOTP()" [disabled]="data.get('mail')?.invalid" [ngClass]="{'opacity-50 cursor-not-allowed': data.get('mail')?.invalid}" class="px-4 py-2 w-1/3 rounded-none mt-4 border text-xs bg-white border-[#7d644a] text-[#7d644a] hover:text-white hover:bg-[#7d644a] transition-all duration-200">Send OTP</button>
+          
+          <div class="mt-8 mb-4">
+            <h4 class="text-sm text-[#7d644a]">OTP:</h4>
+            <input type="number" formControlName="otp" class="w-full mt-2 h-8 pl-2 pr-2 border rounded-md">
+            <div *ngIf="data.get('otp')?.invalid && data.get('otp')?.touched" class="text-red-500 mt-1 absolute">
+              <small class="scale-75">Invalid OTP</small>
+            </div>
+          </div>
+          <button (click)="verifyOTP()" [disabled]="data.get('otp')?.invalid || !verifyB" [ngClass]="{'opacity-50 cursor-not-allowed': data.get('otp')?.invalid || !verifyB}" class="px-4 py-2 w-1/3 rounded-none mt-4 border text-xs bg-white border-[#7d644a] text-[#7d644a] hover:text-white hover:bg-[#7d644a] transition-all duration-200">Verify OTP</button>
+          
+          <div class="mt-8 mb-4">
+            <h4 class="text-sm text-[#7d644a]">New Password:</h4>
+            <input type="password" formControlName="password" class="w-full mt-2 h-8 pl-2 pr-2 border rounded-md">
+            <div *ngIf="data.get('password')?.invalid && data.get('password')?.touched" class="text-red-500 mt-1 absolute">
+              <small class="scale-75">(Minimum 8 characters, at least one letter and one number)</small>
+            </div>
+          </div>
+          <div class="mt-8 mb-4">
+            <h4 class="text-sm text-[#7d644a]">Confirm Password:</h4>
+            <input type="password" formControlName="confirmpass" class="w-full mt-2 h-8 pl-2 pr-2 border rounded-md">
+            <div *ngIf="data.get('confirmpass')?.invalid && data.get('confirmpass')?.touched" class="text-red-500 mt-1 absolute">
+              <small class="scale-75">Passwords do not match!</small>
+            </div>
+          </div>
+          <button (click)="resetPass()" [disabled]="data.get('password')?.invalid || data.get('confirmpass')?.invalid || !resetB" [ngClass]="{'opacity-50 cursor-not-allowed': data.get('password')?.invalid || data.get('confirmpass')?.invalid || !resetB}" class="px-4 py-2 w-1/3 rounded-none mt-4 border text-xs bg-white border-[#7d644a] text-[#7d644a] hover:text-white hover:bg-[#7d644a] transition-all duration-200">Reset</button>
+        </form>
+      </div>
+    </div>
+  </body>
+  

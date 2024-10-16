@@ -1,0 +1,93 @@
+<app-header-user></app-header-user>
+
+<script src="../path/to/datatables.min.js"></script>
+
+<div class="mt-8">
+  <div id="bgScreen1" class="flex justify-between" style="width: 1500px;"> 
+    <div class="flex justify-start ml-16 gap-4">
+      <input class="shadow-md px-4 py-1 text-sm border rounded-xl border-emerald-400 active:border-emerald-400" type="text" placeholder="Search..." #filter>
+      <button class="shadow-md px-4 py-1 text-sm font-semibold rounded-lg border border-emerald-400 hover:text-white hover:bg-emerald-400 hover:border-transparent active:outline-none active:shadow-none active:translate-y-0.2 active:ring-offset-2" type="button" (click)="onSearch(filter.value)">Search</button>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+
+<br>
+<br>
+<div class="scale-90" id="bgScreen">
+  <ngx-datatable 
+    #table
+    class="material"
+    [rows]="forms"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowClass]="onGetRowClass"
+    rowHeight="auto"
+    [externalPaging]="true"
+    [count]="totall"
+    [offset]="pageNumber"
+    [limit]="pageSize"
+    (page)="onPageChange($event)"
+    (sort)="onSort($event)"
+  >
+    <ngx-datatable-column name="#" [width]="110" [sortable]="false">
+      <ng-template let-rowIndex="rowIndex" ngx-datatable-cell-template>
+        {{ (pageKeep * pageSize) + rowIndex + 1 }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column [width]="250" *ngFor="let colDef of colDefs" [name]="colDef.name" [prop]="colDef.prop">
+      <ng-template let-column="column" ngx-datatable-header-template>
+        {{ column.name }}
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        {{ value }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Device" [width]="160" [sortable]="false">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <div (click)="checker(row.deviceId)" id="tooltip">
+          <span *ngIf="row.deviceId && row.deviceId.length != 0" class="material-symbols-outlined pl-1 text-green-400 hover:font-semibold">
+            check_circle
+          </span>
+          <span *ngIf="row.deviceId && row.deviceId.length === 0" class="material-symbols-outlined pl-1 text-red-400 hover:font-semibold">
+            cancel
+          </span>
+          <div *ngIf="row.deviceId && row.deviceId.length != 0" id="tooltipText" class="border-2 border-green-400 bg-green-400 text-white font-bold p-3 shadow-md rounded-lg text-center text-xs absolute z-10">
+            <span>{{ row.deviceId }}</span>
+          </div>
+          <div *ngIf="row.deviceId && row.deviceId.length === 0" id="tooltipText" class="border-2 border-red-400 bg-red-400 text-white font-bold p-2 shadow-md rounded-lg text-center text-sm absolute z-10">
+            <span>!</span>
+          </div>
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-footer>
+      <ng-template
+        ngx-datatable-footer-template
+        let-rowCount="rowCount"
+        let-pageSize="pageSize"
+        let-selectedCount="selectedCount"
+        let-curPage="curPage"
+        let-offset="offset">
+        <div class="p-3">{{ rowCount }} total</div>
+        <datatable-pager
+          [pagerLeftArrowIcon]="'datatable-icon-left'"
+          [pagerRightArrowIcon]="'datatable-icon-right'"
+          [pagerPreviousIcon]="'datatable-icon-prev'"
+          [pagerNextIcon]="'datatable-icon-skip'"
+          [size]="pageSize"
+          [count]="totall"
+          (change)="table.onFooterPage($event)">
+        </datatable-pager>
+      </ng-template>
+    </ngx-datatable-footer>
+  </ngx-datatable>
+</div>

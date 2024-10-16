@@ -1,0 +1,65 @@
+.ngx-datatable.material .datatable-body .datatable-body-row .datatable-body-cell {
+    background-color: var(--lpx-card-bg);
+    padding: 0.875rem 1rem !important;
+    vertical-align: middle;
+    border-top: 1px solid var(--lpx-border-color) !important;
+    color: var(--lpx-content-text);
+  }
+
+/* 
+  ::ng-deep .blueRow{
+    background: #8AAAE580;
+    
+  } */
+
+  :host
+  ::ng-deep
+  .ngx-datatable.bootstrap:not(.cell-selection)
+  .datatable-body-row:hover,
+:host
+  ::ng-deep
+  .ngx-datatable.material:not(.cell-selection)
+  .datatable-body-row:hover
+  .datatable-row-group {
+  background: #8aaae580;
+}
+
+
+  ::ng-deep .whiteRow{
+    background: white;
+  }
+
+  /* ::ng-deep .ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover,
+  .ngx-datatable.material:not(.cell-selection) .datatable-body-row:hover .datatable-row-group {
+    background-color: rgb(154, 183, 255);
+    transition-property: background;
+    transition-duration: 0.6s;
+    transition-timing-function: linear; 
+  } */
+
+
+#tooltip{
+    cursor: pointer;
+    width: auto;
+    height: auto; 
+    white-space: nowrap;
+}
+
+#tooltipText{
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s;
+    position: absolute; 
+    z-index: 9999; 
+    top: -30px;
+    left: 74%; 
+    transform: translateX(-50%);
+
+}
+
+
+#tooltip:hover #tooltipText{
+    visibility: visible;
+    opacity: 1;
+}
+

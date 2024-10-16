@@ -1,0 +1,8 @@
+.active-link{
+    color:var(--themeC);
+    font-weight:400;
+}
+
+.edit:hover{
+    cursor:not-allowed;
+  }

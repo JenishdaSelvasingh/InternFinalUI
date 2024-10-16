@@ -1,0 +1,60 @@
+.dialog-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .dialog-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+  }
+  
+  .delete-icon {
+    cursor: pointer;
+    font-size: 24px; 
+    color: red; 
+  }
+
+  .delete-icon:hover {
+    color: black;
+  }
+
+  
+  mat-dialog-content {
+    padding-bottom: 20px;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: center;
+    gap: 30px; 
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between; 
+}
+
+  button {
+    min-width: 120px;
+  }
+  
+  button.submit {
+    background-color: #03a9f4;
+    color: white;
+  }
+  
+  button.submit:hover {
+    background-color: skyblue;
+  }
+
+  button.cancel {
+    background-color: gainsboro;
+  }
+  
+  mat-dialog-container {
+    border-radius: 8px;
+    padding: 0;
+  }
+  

@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<div class="inset-0 z-10 " (click)="close()">
+    <div id="reqScreen" class="absolute inset-0 flex items-start mr-24 p-12 mt-20 justify-end z-20" (click)="test()">
+        <table class="table-auto w-auto bg-gradient-to-r border border-themeC shadow-lg shadow-[#cad9f3] from-[#f6fbbb] to-[#fafafa] p-6">
+          <!-- <thead>
+            <tr>
+              <th class="px-2 py-1 text-xs text-[#8AAAE5]">Nt Id</th>
+              <th class="px-2 py-1 text-xs text-[#8AAAE5]">Requested</th>
+              <th class="px-2 py-1 text-xs text-[#8AAAE5]">Approve</th>
+              <th class="px-2 py-1 text-xs text-[#8AAAE5]">Decline</th>
+            </tr>
+          </thead> -->
+          <tbody>
+            <tr *ngFor="let row of reqs; let i = index">
+              <td class="border-t22 border-themeC text-xs px-4 py-2 text-black font-medium">{{ row.ntId }} has requested for a {{row.itemType}}</td>
+              <!-- <td class="border-t rounded-lg border-[#8AAAE5] px-2 py-1 text-xs text-[#8AAAE5] font-medium">{{ row.itemType }}</td> -->
+              <td class="border-t22 border-themeC px-1 py-1 text-emerald-400">
+                <button (click)="acceptReq(row.ntId,row.itemType)">
+                  <span class="material-symbols-outlined scale-75 translate-y-1">
+                    done_outline
+                  </span>
+                </button>
+              </td>
+              <td class="border-t22 border-themeC px-1 py-1 text-red-400">
+                <button (click)="closeForm(row.ntId,row.itemType)">
+                  <span class="material-symbols-outlined scale-75 translate-y-1">
+                    cancel
+                  </span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+</div>
